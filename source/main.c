@@ -116,6 +116,9 @@ int main(int argc, char* argv[]) {
 		u32 kDown = hidKeysDown();
 		if (kDown & KEY_START)
 			break; // break in order to return to hbmenu
+		if (kDown & KEY_A)
+			initCells();
+
 		printf("\x1b[1;1HGame of Life by AuditeMarlow");
 		printf("\x1b[2;1HCPU:     %6.2f%%\x1b[K", C3D_GetProcessingTime()*6.0f);
 		printf("\x1b[3;1HGPU:     %6.2f%%\x1b[K", C3D_GetDrawingTime()*6.0f);
