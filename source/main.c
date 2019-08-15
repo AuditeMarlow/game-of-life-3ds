@@ -131,9 +131,11 @@ int main(int argc, char* argv[]) {
 			break; // break in order to return to hbmenu
 		if (kDown & KEY_A)
 			randomizeCells();
-		if (kDown & KEY_RIGHT && speed > 0)
+
+		u32 kHeld = hidKeysHeld();
+		if (kHeld & KEY_RIGHT && speed > 0)
 			speed -= 10;
-		if (kDown & KEY_LEFT && speed < 1000)
+		if (kHeld & KEY_LEFT && speed < 1000)
 			speed += 10;
 
 		printf("\x1b[1;1HGame of Life by AuditeMarlow");
