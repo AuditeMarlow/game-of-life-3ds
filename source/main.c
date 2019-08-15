@@ -36,14 +36,6 @@ void randomizeCells() {
 	}
 }
 
-void printCells() {
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			printf("\x1b[%d;%dH%d", i + 6, j + 1, cells[i][j]);
-		}
-	}
-}
-
 void draw() {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
@@ -92,7 +84,6 @@ void step() {
 		}
 	}
 
-	printCells();
 	draw();
 }
 
