@@ -19,7 +19,19 @@ int previous[ROWS][COLUMNS];
 void initCells() {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
-			cells[i][j] = rand() % 2;
+			cells[i][j] = 0;
+		}
+	}
+}
+
+void randomizeCells() {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLUMNS; j++) {
+			int cell = rand() % 2;
+
+			if (cell > 0) {
+				cells[i][j] = cell;
+			}
 		}
 	}
 }
@@ -104,8 +116,9 @@ int main(int argc, char* argv[]) {
 	// Create colors
 	u32 clrClear = C2D_Color32(0xFF, 0xD8, 0xB0, 0x68);
 
-	// Initialize first cells states
+	// Initialize & randomize first cells states
 	initCells();
+	randomizeCells();
 
 	// Main loop
 	while (aptMainLoop())
@@ -117,7 +130,7 @@ int main(int argc, char* argv[]) {
 		if (kDown & KEY_START)
 			break; // break in order to return to hbmenu
 		if (kDown & KEY_A)
-			initCells();
+			randomizeCells();
 
 		printf("\x1b[1;1HGame of Life by AuditeMarlow");
 		printf("\x1b[2;1HCPU:     %6.2f%%\x1b[K", C3D_GetProcessingTime()*6.0f);
