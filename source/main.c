@@ -88,8 +88,6 @@ void step() {
 				cells[i][j] = 1;
 			} else if (previous[i][j] == 1 && (neighbours < 2 || neighbours > 3)) {
 				cells[i][j] = 0;
-			} else {
-				memcpy(&cells[i][j], &previous[i][j], sizeof(previous[i][j]));
 			}
 		}
 	}
