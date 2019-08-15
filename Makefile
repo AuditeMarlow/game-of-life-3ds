@@ -37,9 +37,12 @@ SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
 GRAPHICS	:=	gfx
-#GFXBUILD	:=	$(BUILD)
-ROMFS		:=	romfs
-GFXBUILD	:=	$(ROMFS)/gfx
+GFXBUILD	:=	$(BUILD)
+#ROMFS		:=	romfs
+#GFXBUILD	:=	$(ROMFS)/gfx
+APP_TITLE	:=	Game of Life
+APP_DESCRIPTION	:=	A simple C implementation of Conway's Game of Life
+APP_AUTHOR	:=	AuditeMarlow
 
 #---------------------------------------------------------------------------------
 # options for code generation
