@@ -15,6 +15,7 @@
 
 int cells[ROWS][COLUMNS];
 int previous[ROWS][COLUMNS];
+int speed;
 
 void initCells() {
 	for (int i = 0; i < ROWS; i++) {
@@ -36,6 +37,14 @@ void randomizeCells() {
 	}
 }
 
+void msleep(int milliseconds)
+{
+	struct timespec ts;
+	ts.tv_sec = milliseconds / 1000;
+	ts.tv_nsec = (milliseconds % 1000) * 1000000;
+	nanosleep(&ts, NULL);
+}
+
 void draw() {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
@@ -50,7 +59,7 @@ void draw() {
 
 int getNeighbourValue(int row, int column) {
 	if (row < 0 || row >= ROWS ) { return 0; }
-    if (column < 0 || column >= COLUMNS ) { return 0; }
+	if (column < 0 || column >= COLUMNS ) { return 0; }
 	return (previous[row][column] == 1) ? 1 : 0;
 }
 
@@ -105,6 +114,8 @@ int main(int argc, char* argv[]) {
 	// Create colors
 	u32 clrClear = C2D_Color32(0xFF, 0xD8, 0xB0, 0x68);
 
+	speed = 100;
+
 	// Initialize & randomize first cells states
 	initCells();
 	randomizeCells();
@@ -120,6 +131,10 @@ int main(int argc, char* argv[]) {
 			break; // break in order to return to hbmenu
 		if (kDown & KEY_A)
 			randomizeCells();
+		if (kDown & KEY_RIGHT && speed > 0)
+			speed -= 10;
+		if (kDown & KEY_LEFT && speed < 1000)
+			speed += 10;
 
 		printf("\x1b[1;1HGame of Life by AuditeMarlow");
 		printf("\x1b[2;1HCPU:     %6.2f%%\x1b[K", C3D_GetProcessingTime()*6.0f);
@@ -133,6 +148,7 @@ int main(int argc, char* argv[]) {
 		C2D_SceneBegin(top);
 
 		step();
+		msleep(speed);
 
 		C3D_FrameEnd(0);
 	}
