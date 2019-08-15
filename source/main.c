@@ -27,10 +27,10 @@ void initCells() {
 void randomizeCells() {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
-			int cell = rand() % 2;
+			int cell = rand() % (10 + 1);
 
-			if (cell > 0) {
-				cells[i][j] = cell;
+			if (cell > 9) {
+				cells[i][j] = 1;
 			}
 		}
 	}
